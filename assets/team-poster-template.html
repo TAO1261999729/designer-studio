@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-canvas-width="1080" data-canvas-height="1440" style="width:1080px;height:1440px;">
+<head>
+<meta charset="UTF-8">
+<title>团队形象海报模板（可编辑）</title>
+<!--
+  ============================================================
+  使用说明（运营替换时只动下面两类，版式/配色已锁定，不要改样式）
+  ------------------------------------------------------------
+  1) 换人物照片：
+     每个 <figure class="card"> 内有一张空 <img class="card-img">。
+     把照片地址填到 src="" 里即可，例如 src="photo-01.jpg"；
+     填好后占位轮廓会自动隐藏。照片建议：黑色系商务正装、半身、正面或微侧。
+  2) 换文案：
+     直接改对应节点里的文字，不要删节点本身。
+     - 中部大标题：<h1 class="brand-title">
+     - 标题下英文：<p class="brand-en">
+     - 左右卖点：<div class="points"> 内的 <p>
+  画布固定 1080×1440（3:4 竖版），导出时按原尺寸截图即可。
+  ============================================================
+-->
+<style>
+  @font-face {
+    font-family: "Source Han Sans SC VF";
+    src: url("https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/infinite-canvas/fonts/v1/source-han-sans-sc-vf/source-han-sans-sc-vf.otf") format("opentype");
+    font-weight: 250 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/infinite-canvas/fonts/v1/montserrat/montserrat-regular.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/infinite-canvas/fonts/v1/montserrat/montserrat-semi-bold.ttf") format("truetype");
+    font-weight: 600; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/infinite-canvas/fonts/v1/montserrat/montserrat-bold.ttf") format("truetype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1440px; background: var(--bg); }
+
+  :root {
+    --bg: #F5F3F0;
+    --card: #FFFFFF;
+    --line: #E7E4DF;
+    --ink: #1C1B1A;
+    --ink-2: #4A463F;
+    --ink-3: #8A857D;
+    --ph-bg: #EFEDE9;
+    --ph-line: #D6D2CB;
+    --ph-text: #B7B2AA;
+    --accent: #B82E28;
+    --letter: #E4E1DB;
+  }
+
+  main {
+    position: relative;
+    width: 1080px;
+    height: 1440px;
+    background: var(--bg);
+    overflow: hidden;
+    font-family: "Source Han Sans SC VF", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+  }
+
+  /* ---------- 人物照片卡片（坐标内联在各卡片上） ---------- */
+  .card {
+    position: absolute; z-index: 2;
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    overflow: hidden; box-shadow: 0 10px 24px rgba(60, 50, 40, 0.06);
+  }
+  .card-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  /* 填了 src 后自动隐藏占位 */
+  .card-img[src]:not([src=""]) ~ .ph { display: none; }
+
+  .ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; background: var(--ph-bg);
+  }
+  .ph svg { width: 74px; height: 74px; }
+  .ph-no {
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    font-size: 22px; letter-spacing: 0.12em; color: var(--ph-text);
+  }
+  .ph-tip { font-size: 18px; color: var(--ph-text); letter-spacing: 0.08em; }
+
+  /* ---------- 穿插的字母方块（装饰，无需改动） ---------- */
+  .letter {
+    position: absolute; z-index: 1;
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Montserrat", sans-serif; font-weight: 800;
+    font-size: 130px; line-height: 1; color: var(--letter);
+    user-select: none;
+  }
+
+  /* ---------- 中部标题带 ---------- */
+  .title-band {
+    position: absolute; left: 40px; right: 40px; top: 600px; height: 180px; z-index: 3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .brand-title {
+    font-weight: 900; font-size: 118px; line-height: 1.1;
+    color: var(--accent); letter-spacing: 0.04em; text-align: center;
+  }
+  .brand-en {
+    margin-top: 18px;
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    font-size: 24px; letter-spacing: 0.4em; color: var(--ink-3); text-align: center;
+  }
+
+  .points { position: absolute; top: 50%; transform: translateY(-50%); }
+  .points-left  { left: 0;  text-align: left; }
+  .points-right { right: 0; text-align: right; }
+  .points p { font-size: 26px; font-weight: 400; line-height: 1.8; color: var(--ink-2); }
+</style>
+</head>
+<body style="width:1080px;height:1440px;">
+<main data-canvas-root id="canvas-root" style="width:1080px;height:1440px;">
+
+  <!-- ============ 上组：人物 01–05 + 字母 N / I / M / G ============ -->
+
+  <!-- 01 左上大 -->
+  <figure class="card" data-photo="01" style="left:40px; top:30px; width:250px; height:380px;">
+    <img class="card-img" src="" alt="设计师 01">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">01</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <!-- 02 上中 -->
+  <figure class="card" data-photo="02" style="left:310px; top:30px; width:250px; height:220px;">
+    <img class="card-img" src="" alt="设计师 02">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">02</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:590px; top:30px; width:200px; height:220px;">N</div>
+
+  <!-- 03 右上大 -->
+  <figure class="card" data-photo="03" style="left:810px; top:30px; width:230px; height:380px;">
+    <img class="card-img" src="" alt="设计师 03">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">03</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:310px; top:265px; width:180px; height:165px;">I</div>
+
+  <!-- 04 C 位大 -->
+  <figure class="card" data-photo="04" style="left:510px; top:170px; width:300px; height:330px;">
+    <img class="card-img" src="" alt="设计师 04">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">04</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <!-- 05 中下 -->
+  <figure class="card" data-photo="05" style="left:230px; top:440px; width:250px; height:160px;">
+    <img class="card-img" src="" alt="设计师 05">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">05</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:40px; top:420px; width:170px; height:170px;">M</div>
+  <div class="letter" style="left:810px; top:420px; width:230px; height:170px;">G</div>
+
+  <!-- ============ 中部标题带 ============ -->
+  <section class="title-band">
+    <div class="points points-left">
+      <p>左侧卖点文案一</p>
+      <p>左侧卖点文案二</p>
+    </div>
+
+    <h1 class="brand-title">品牌名称</h1>
+    <p class="brand-en">BRAND · DESIGN · TEAM</p>
+
+    <div class="points points-right">
+      <p>右侧卖点文案一</p>
+      <p>右侧卖点文案二</p>
+    </div>
+  </section>
+
+  <!-- ============ 下组：人物 06–10 + 字母 D / O / I / A ============ -->
+
+  <div class="letter" style="left:40px; top:800px; width:170px; height:200px;">D</div>
+
+  <!-- 06 上中 -->
+  <figure class="card" data-photo="06" style="left:230px; top:800px; width:230px; height:200px;">
+    <img class="card-img" src="" alt="设计师 06">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">06</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <!-- 07 C 位大 -->
+  <figure class="card" data-photo="07" style="left:510px; top:800px; width:300px; height:300px;">
+    <img class="card-img" src="" alt="设计师 07">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">07</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:810px; top:800px; width:230px; height:200px;">O</div>
+
+  <!-- 08 左下大 -->
+  <figure class="card" data-photo="08" style="left:40px; top:1020px; width:250px; height:340px;">
+    <img class="card-img" src="" alt="设计师 08">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">08</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:310px; top:1020px; width:180px; height:150px;">I</div>
+
+  <!-- 09 中下小 -->
+  <figure class="card" data-photo="09" style="left:310px; top:1180px; width:250px; height:180px;">
+    <img class="card-img" src="" alt="设计师 09">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">09</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <!-- 10 右下大 -->
+  <figure class="card" data-photo="10" style="left:810px; top:1020px; width:230px; height:340px;">
+    <img class="card-img" src="" alt="设计师 10">
+    <figcaption class="ph">
+      <svg viewBox="0 0 80 80" fill="none" stroke="var(--ph-line)" stroke-width="4" stroke-linecap="round">
+        <circle cx="40" cy="30" r="14"/><path d="M14 70 q26 -26 52 0"/>
+      </svg>
+      <span class="ph-no">10</span><span class="ph-tip">替换照片</span>
+    </figcaption>
+  </figure>
+
+  <div class="letter" style="left:590px; top:1160px; width:200px; height:200px;">A</div>
+
+</main>
+</body>
+</html>
